@@ -2,7 +2,7 @@
 const User = use('App/Models/User')
 
 class UserController {
-  show ({auth, params}) {
+  async show ({auth, params}) {
     if (auth.user.id !== Number(params.id)) {
       return 'You cannot see someone else\'s profile'
     }
@@ -10,7 +10,7 @@ class UserController {
     return auth.user
   }
 
-  async delete ({params}) {
+  async destroy ({params}) {
     const user = await User.find(Number(params.id))
     await user.delete()
   }

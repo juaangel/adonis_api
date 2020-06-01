@@ -30,10 +30,11 @@ class AuthController {
     if (userExists) return 'The user already exists'
 
     const user = await User.create(data)
+    let token = await auth.generate(user)
 
-    let accessToken = await auth.generate(user)
+    Object.assign(user, token)
 
-    return { 'user': user, 'access_token': accessToken }
+    return response.json(user)
   }
 }
 
