@@ -2,6 +2,10 @@
 const User = use('App/Models/User')
 
 class UserController {
+  async index () {
+    return User.all()
+  }
+
   async show ({auth, params}) {
     if (auth.user.id !== Number(params.id)) {
       return 'You cannot see someone else\'s profile'

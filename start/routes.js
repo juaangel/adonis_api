@@ -19,5 +19,7 @@ Route.group(() => {
   Route.get('logout', 'AuthController.logout').middleware('auth')
 }).prefix('auth');
 
-Route.resource('users', 'UserController').only(['destroy', 'show', 'update'])
-  .middleware('auth')
+Route.get('users', 'UserController.index')
+
+Route.resource('users', 'UserController').only(['destroy', 'show',
+'update']).middleware('auth')
