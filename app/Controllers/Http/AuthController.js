@@ -12,8 +12,6 @@ class AuthController {
       Object.assign(user, token)
       return response.json(user)
     }
-
-    return response.json({ message: 'You first need to register!' })
   }
 
   async logout() {
@@ -30,7 +28,7 @@ class AuthController {
     if (userExists) return 'username exists'
 
     // looking for email in database
-    const userExists = await User.findBy('email', data.email)
+    userExists = await User.findBy('email', data.email)
     if (userExists) return 'email taken'
 
     const user = await User.create(data)

@@ -17,10 +17,10 @@ Route.group(() => {
   Route.post('register', 'AuthController.register')
   // Logout
   Route.get('logout', 'AuthController.logout').middleware('auth')
-}).prefix('auth');
 
-Route.get('users', 'UserController.index')
-Route.get('users/:searchFactor', 'UserController.show')
+  Route.get('users', 'UserController.index')
+  Route.get('users/:searchFactor', 'UserController.show')
 
-Route.resource('users', 'UserController')
-  .only(['destroy', 'update']).middleware('auth')
+  Route.resource('users', 'UserController')
+    .only(['destroy', 'update']).middleware('auth')
+}).prefix('api');
