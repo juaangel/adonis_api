@@ -18,18 +18,22 @@ class AuthController {
     await auth.logout()
   }
 
-  async register({ request, auth, response }) {
+  async signUp({ request, auth, response }) {
     const data = request.only(['username', 'email', 'password'])
 
     // looking for user in database
-    const userExists = await User.findBy('username', data.username)
+    let userExists = await User.findBy('username', data.username)
 
     // if user doesn't exist, it'll be saved in DB
-    if (userExists) return 'username exists'
+    if (userExists) {
+      return { msg: 'username exists' }
+    }
 
     // looking for email in database
     userExists = await User.findBy('email', data.email)
-    if (userExists) return 'email taken'
+    if (userExists) {
+      return { msg: 'email taken' }
+    }
 
     const user = await User.create(data)
     let token = await auth.generate(user)

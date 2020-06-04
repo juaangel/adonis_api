@@ -14,7 +14,7 @@ Route.group(() => {
   // User login and register authentification
   Route.post('login', 'AuthController.login')
   // User registration
-  Route.post('register', 'AuthController.register')
+  Route.post('signup', 'AuthController.signUp')
   // Logout
   Route.get('logout', 'AuthController.logout').middleware('auth')
 
