@@ -6,12 +6,16 @@ class UserController {
     return User.all()
   }
 
-  async show ({auth, params}) {
-    if (auth.user.id !== Number(params.id)) {
-      return 'You cannot see someone else\'s profile'
-    }
+  async show ({params}) {
+    const searchFactor = params.searchFactor
+    let user
 
-    return auth.user
+    if (isNaN(searchFactor)) // Search by username
+      user = await User.findBy('username', searchFactor)
+    else // Search by Id
+      user = await User.find(searchFactor)
+
+    if (user) return user
   }
 
   async destroy ({params}) {

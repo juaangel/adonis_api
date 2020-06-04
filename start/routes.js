@@ -20,6 +20,7 @@ Route.group(() => {
 }).prefix('auth');
 
 Route.get('users', 'UserController.index')
+Route.get('users/:searchFactor', 'UserController.show')
 
-Route.resource('users', 'UserController').only(['destroy', 'show',
-'update']).middleware('auth')
+Route.resource('users', 'UserController')
+  .only(['destroy', 'update']).middleware('auth')

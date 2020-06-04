@@ -27,7 +27,11 @@ class AuthController {
     const userExists = await User.findBy('username', data.username)
 
     // if user doesn't exist, it'll be saved in DB
-    if (userExists) return 'The user already exists'
+    if (userExists) return 'username exists'
+
+    // looking for email in database
+    const userExists = await User.findBy('email', data.email)
+    if (userExists) return 'email taken'
 
     const user = await User.create(data)
     let token = await auth.generate(user)
