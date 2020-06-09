@@ -10,6 +10,8 @@
 /** @type {typeof import('@adonisjs/framework/src/Route/Manager')} */
 const Route = use('Route')
 
+Route.get('', () => "I'm an API :)")
+
 Route.group(() => {
   // User login and register authentification
   Route.post('login', 'AuthController.login')
